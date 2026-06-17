@@ -1,0 +1,221 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #f2f2f2;
+  color: #222;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+
+
+/* ------------------
+   ヘッダー
+------------------ */
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding-right: 60px;
+
+  background: rgba(242, 242, 242, 0.9);
+
+  z-index: 100;
+}
+
+.list1 {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  align-items: center;
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size:30px;
+}
+
+
+.list1 a {
+  text-decoration: none;
+  color: inherit;
+  position: relative; /* 丸の位置の基準にする */
+  padding: 0 8px;  
+}
+
+/* 既存の border-bottom は削除し、手書き風の丸に変更します */
+.list1 a.active {
+  font-weight: bold;
+  border-bottom: none; /* 下線を消す */
+}
+
+/* ヘッダーの active 時に丸をつける */
+.list1 a.active::after,
+.category a.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  
+  /* 文字のサイズに合わせて丸の大きさを自動調整 */
+  width: 115%;
+  height: 115%;
+  
+  /* 鉛筆エフェクトと同じ薄いグレーの細い線 */
+  border: 1.5px solid rgba(100, 100, 100, 0.7);
+  
+  /* ↓ ここがポイント：あえて四隅の丸みをバラバラにして、綺麗な正円・楕円にせず歪ませます */
+  border-radius: 48% 52% 50% 50% / 40% 45% 55% 60%;
+  
+  pointer-events: none;
+  z-index: -1; /* 文字の背景側に配置 */
+}
+
+
+
+
+
+
+/* ------------------
+   作品詳細ページ (新レイアウト)
+------------------ */
+
+/* 全体のコンテナを縦並び(column)にして中央寄せに */
+.work-detail-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 20px 100px 20px; /* ヘッダーとの余白 */
+  gap: 60px; /* 写真エリアと文章エリアの間の余白 */
+}
+/* 上部：画像エリア（カチッと2列に並べて、横スクロールを絶対に出さない） */
+.work-visual-album {
+  display: grid;
+  /* ↓ 完全に均等な2列を作ります（隙間はトップページと揃えて24px） */
+  grid-template-columns: repeat(2, 1fr); 
+  gap: 24px;         
+  
+  /* ↓ 1枚の最大幅を約500pxにしたいので、2枚＋隙間で全体幅を「1024px」に制限 */
+  width: 1024px;      
+  max-width: 100%;   /* 画面幅を超えないようにするストッパー */
+  
+  /* 画像の上辺（トップライン）をきれいに揃える */
+  align-items: start; 
+}
+
+/* 1枚ずつの写真の枠 */
+.detail-img-box {
+  display: block;
+  width: 100%; /* グリッドの枠いっぱいに広げる */
+}
+
+.detail-img-box img {
+  width: 100%;       /* 枠の横幅に合わせて100%広げる */
+  height: auto;      /* ★超重要：縦幅は自動！これで画像の本来の比率が100%保たれます */
+  
+  /* 比率を保ったまま綺麗に縮小する設定（トリミングは一切しません） */
+  object-fit: contain; 
+  
+  display: block;
+}
+.detail-img-box video {
+  width: 100%;       /* 枠の横幅に合わせて100%広げる */
+  height: auto;      /* ★超重要：縦幅は自動！これで画像の本来の比率が100%保たれます */
+  
+  /* 比率を保ったまま綺麗に縮小する設定（トリミングは一切しません） */
+  object-fit: contain; 
+  
+  display: block;
+}
+
+
+/* 下部：説明文（画像の2列の美しいラインに合わせた幅に微調整） */
+.work-description-bottom {
+  /* ワイヤーフレームのように画像と横幅をぴったり合わせるなら 1024px、
+     少しコンパクトに読ませたいなら 620px のままでもお好みでOKです！ */
+  width: 1024px;      
+  max-width: 100%;
+  text-align: left;
+}
+
+
+.work-category-label {
+  font-family: "Reenie Beanie", cursive;
+  font-size: 28px;
+  color: #888;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.work-description-bottom h1 {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 1.4;
+  color: #222;
+  margin-bottom: 5px;
+  letter-spacing: 0.05em;
+}
+
+.work-date {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 24px;
+}
+
+.work-text {
+  font-family: "Noto Sans JP", sans-serif;
+  font-weight: 300;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  color: #444;
+  letter-spacing: 0.05em;
+}
+
+.work-text p {
+  margin-bottom: 15px;
+}
+
+/* 戻るボタン */
+.back-btn {
+  display: inline-block;
+  margin-top: 30px;
+  text-decoration: none;
+  color: #222;
+  font-family: "Reenie Beanie", cursive;
+  font-size: 26px;
+  transition: 0.3s;
+}
+
+.back-btn:hover {
+  opacity: 0.5;
+  transform: translateX(-5px);
+}
+
+/* ------------------
+   レスポンシブ（詳細ページ用）
+------------------ */
+@media (max-width: 900px) {
+  .work-visual-album,
+  .work-description-bottom {
+    width: 90vw; /* スマホの時は画面幅に合わせる */
+  }
+
+  .detail-img-box {
+    height: 180px; /* スマホでは写真を少し小さくして見やすく */
+  }
+}

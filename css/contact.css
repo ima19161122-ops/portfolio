@@ -1,0 +1,225 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  background: #f2f2f2;
+  color: #222;
+  font-family: sans-serif;
+  scroll-behavior: smooth;
+}
+/* ------------------
+   ヘッダー
+------------------ */
+
+header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 70px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  padding-right: 60px;
+
+  background: rgba(242, 242, 242, 0.9);
+
+  z-index: 100;
+}
+
+.list1 {
+  display: flex;
+  gap: 20px;
+  list-style: none;
+  align-items: center;
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size:30px;
+}
+
+.list1 a {
+  text-decoration: none;
+  color: inherit;
+  position: relative; /* 丸の位置の基準にする */
+  padding: 0 8px;  
+}
+
+/* ヘッダーの active 時に丸をつける */
+.list1 a.active::after,
+.category a.active::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-2deg);
+  
+  /* 文字のサイズに合わせて丸の大きさを自動調整 */
+  width: 115%;
+  height: 115%;
+  
+  /* 鉛筆エフェクトと同じ薄いグレーの細い線 */
+  border: 1.5px solid rgba(100, 100, 100, 0.7);
+  
+  /* ↓ ここがポイント：あえて四隅の丸みをバラバラにして、綺麗な正円・楕円にせず歪ませます */
+  border-radius: 48% 52% 50% 50% / 40% 45% 55% 60%;
+  
+  pointer-events: none;
+  z-index: -1; /* 文字の背景側に配置 */
+}
+main {
+    width: 100%;
+}
+
+
+
+.contact-section{
+
+  display: flex;
+  min-height: 100vh;
+
+ justify-content: center;
+ align-items: center;
+ gap: 200px;
+position: relative;
+
+}
+
+/* 左側 */
+.contact-title {
+  width: 260px;
+
+}
+
+.contact-title h1 {
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 50px;
+  margin-bottom: 50px;
+}
+
+.contact-title p {
+padding-bottom: 10px;
+  font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;
+  line-height: 1.75;
+  margin-bottom: 30px;
+}
+
+.contact-sns a {
+  text-decoration: none;
+  color: #222;
+  font-size: 0.9rem;
+  margin-right: 20px;
+  transition: 0.3s;
+  border-bottom: 1px solid #222;
+  padding-bottom: 2px;
+}
+
+.contact-sns a:hover {
+  opacity: 0.6;
+}
+
+/* 右側*/
+.contact-form-container {
+  width: 620px;
+}
+
+.contact-form {
+  display: flex;
+  flex-direction: column;
+  gap: px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+  letter-spacing: 0.05em;
+  font-size:25px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #bbb;
+    font-family: "Noto Sans JP", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 15px;;
+  color: #222;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-bottom-color: #222; /* フォーカスした時に線が濃くなる */
+}
+
+/* 送信ボタン */
+.submit-btn {
+  align-self: flex-start; /* ボタンを左寄せに */
+  stroke: #222;
+  color:#222;
+  border: none;
+  padding: 12px 50px;
+  font-family: "Reenie Beanie", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size:25px;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-top: 10px;
+}
+
+.submit-btn:hover {
+  stroke: #555;
+}
+
+
+
+
+/* ------------------
+   レスポンシブ（Contact用追加）
+------------------ */
+@media (max-width: 900px) {
+  .contact-section {
+    flex-direction: column;
+    gap: 50px;
+    padding-top: 120px;
+  }
+
+  .contact-title {
+    width: 100%;
+    text-align: center;
+  }
+
+  .contact-form-container {
+    width: 90vw;
+  }
+  
+  .submit-btn {
+    align-self: center; /* スマホではボタンを中央に */
+    width: 100%;
+  }
+}
